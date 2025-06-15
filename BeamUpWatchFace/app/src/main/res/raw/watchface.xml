@@ -1,15 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WatchFace width="450" height="450">
-    <Metadata key="PREVIEW_TIME" value="10:08:32" />
+    <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
+    <Metadata key="PREVIEW_TIME" value="10:08:32"/>
     
-    <Scene backgroundColor="#000000">
-        <!-- Digital Time Display -->
-        <DigitalClock x="225" y="225">
-            <TimeText format="HH:mm" hourFormat="24">
-                <Font family="ROBOTO_MEDIUM" size="72" color="#FFFFFF">
-                    <Template>%s</Template>
-                </Font>
+    <Scene backgroundColor="#ff000000">
+        
+        <!-- Time Display - Individual Digits (bottom aligns at y=200, slightly above center) -->
+        
+        <!-- Hour Tens Digit -->
+        <DigitalClock x="135" y="140" width="40" height="60">
+            <TimeText format="HH" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="40" height="60" alpha="255">
+                <Font family="SYNC_TO_DEVICE" size="48" weight="NORMAL" slant="NORMAL" color="#ffffffff"/>
+                <Template charAtIndex="0" />
             </TimeText>
         </DigitalClock>
+        
+        <!-- Hour Ones Digit -->
+        <DigitalClock x="175" y="140" width="40" height="60">
+            <TimeText format="HH" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="40" height="60" alpha="255">
+                <Font family="SYNC_TO_DEVICE" size="48" weight="NORMAL" slant="NORMAL" color="#ffffffff"/>
+                <Template charAtIndex="1" />
+            </TimeText>
+        </DigitalClock>
+        
+        <!-- Colon Separator -->
+        <Group x="215" y="140" width="20" height="60">
+            <PartText x="0" y="0" width="20" height="60">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="48" weight="NORMAL" slant="NORMAL" color="#ffffffff">:</Font>
+                </Text>
+            </PartText>
+        </Group>
+        
+        <!-- Minute Tens Digit -->
+        <DigitalClock x="235" y="140" width="40" height="60">
+            <TimeText format="mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="40" height="60" alpha="255">
+                <Font family="SYNC_TO_DEVICE" size="48" weight="NORMAL" slant="NORMAL" color="#ffffffff"/>
+                <Template charAtIndex="0" />
+            </TimeText>
+        </DigitalClock>
+        
+        <!-- Minute Ones Digit -->
+        <DigitalClock x="275" y="140" width="40" height="60">
+            <TimeText format="mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="0" width="40" height="60" alpha="255">
+                <Font family="SYNC_TO_DEVICE" size="48" weight="NORMAL" slant="NORMAL" color="#ffffffff"/>
+                <Template charAtIndex="1" />
+            </TimeText>
+        </DigitalClock>
+        
+        <!-- Progress Bar (Seconds) - Updates every 15 seconds -->
+        <!-- 0-14 seconds: 0% width -->
+        <Group x="0" y="220" width="0" height="4" alpha="255">
+            <PartDraw x="0" y="0" width="450" height="4">
+                <RectangleShape x="0" y="0" width="450" height="4">
+                    <Fill color="#ffffffff" />
+                </RectangleShape>
+            </PartDraw>
+            <Variant mode="AMBIENT" target="alpha" value="128"/>
+            <Transform>
+                <Animate target="width" duration="15000" repeatMode="RESTART" repeatCount="-1">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.25" value="112" />
+                    <Keyframe location="0.5" value="225" />
+                    <Keyframe location="0.75" value="337" />
+                    <Keyframe location="1.0" value="450" />
+                </Animate>
+            </Transform>
+        </Group>
+        
+        <!-- Day Display (WWW DD format) -->
+        <Group x="0" y="240" width="450" height="30">
+            <PartText x="0" y="0" width="450" height="30">
+                <Text align="CENTER">
+                    <Font family="SYNC_TO_DEVICE" size="24" weight="NORMAL" slant="NORMAL" color="#ffffffff">
+                        <Template>%s<Parameter expression="[WDAY3] [DOM2]"></Parameter></Template>
+                    </Font>
+                </Text>
+                <Variant mode="AMBIENT" target="alpha" value="128"/>
+            </PartText>
+        </Group>
+        
+        <!-- Beam Animation Elements - Minute Tens Digit -->
+        <Group x="220" y="0" width="50" height="450" alpha="0" name="beam_min_tens">
+            <PartDraw x="0" y="0" width="50" height="200">
+                <RectangleShape x="0" y="0" width="50" height="200">
+                    <Fill color="#ffffffff" />
+                </RectangleShape>
+            </PartDraw>
+            <Transform>
+                <!-- Beam expansion and retraction sequence -->
+                <Animate target="height" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.25" value="200" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.75" value="200" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="MINUTE_CHANGE" />
+                </Animate>
+                <Animate target="alpha" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.1" value="255" />
+                    <Keyframe location="0.4" value="255" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.6" value="255" />
+                    <Keyframe location="0.9" value="255" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="MINUTE_CHANGE" />
+                </Animate>
+            </Transform>
+        </Group>
+        
+        <!-- Beam Animation Elements - Minute Ones Digit -->
+        <Group x="260" y="0" width="50" height="450" alpha="0" name="beam_min_ones">
+            <PartDraw x="0" y="0" width="50" height="200">
+                <RectangleShape x="0" y="0" width="50" height="200">
+                    <Fill color="#ffffffff" />
+                </RectangleShape>
+            </PartDraw>
+            <Transform>
+                <Animate target="height" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.25" value="200" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.75" value="200" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="MINUTE_CHANGE" />
+                </Animate>
+                <Animate target="alpha" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.1" value="255" />
+                    <Keyframe location="0.4" value="255" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.6" value="255" />
+                    <Keyframe location="0.9" value="255" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="MINUTE_CHANGE" />
+                </Animate>
+            </Transform>
+        </Group>
+        
+        <!-- Beam Animation Elements - Hour Digits (for hour changes) -->
+        <Group x="120" y="0" width="90" height="450" alpha="0" name="beam_hours">
+            <PartDraw x="0" y="0" width="90" height="200">
+                <RectangleShape x="0" y="0" width="90" height="200">
+                    <Fill color="#ffffffff" />
+                </RectangleShape>
+            </PartDraw>
+            <Transform>
+                <Animate target="height" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.25" value="200" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.75" value="200" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="HOUR_CHANGE" />
+                </Animate>
+                <Animate target="alpha" duration="1000" repeatMode="RESTART">
+                    <Keyframe location="0.0" value="0" />
+                    <Keyframe location="0.1" value="255" />
+                    <Keyframe location="0.4" value="255" />
+                    <Keyframe location="0.5" value="0" />
+                    <Keyframe location="0.6" value="255" />
+                    <Keyframe location="0.9" value="255" />
+                    <Keyframe location="1.0" value="0" />
+                    <Trigger type="HOUR_CHANGE" />
+                </Animate>
+            </Transform>
+        </Group>
+        
     </Scene>
 </WatchFace>
