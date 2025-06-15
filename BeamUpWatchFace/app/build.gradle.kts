@@ -37,7 +37,4 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.wear.watchface:watchface:1.2.1")
-    implementation("androidx.wear.watchface:watchface-complications-data:1.2.1")
-    implementation("androidx.wear.watchface:watchface-complications-rendering:1.2.1")
 }

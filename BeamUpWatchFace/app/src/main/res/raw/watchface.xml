@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="PREVIEW_TIME" value="10:08:32" />
+    
+    <Scene backgroundColor="#000000">
+        <!-- Digital Time Display -->
+        <DigitalClock x="225" y="225">
+            <TimeText format="HH:mm" hourFormat="24">
+                <Font family="ROBOTO_MEDIUM" size="72" color="#FFFFFF">
+                    <Template>%s</Template>
+                </Font>
+            </TimeText>
+        </DigitalClock>
+    </Scene>
+</WatchFace>

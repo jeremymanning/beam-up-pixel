@@ -13,21 +13,24 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <service
-            android:name="com.example.beamupwatchface.BeamUpWatchFaceService"
-            android:exported="true"
-            android:label="@string/my_watch_face"
-            android:directBootAware="true">
+        <!-- Declare this is a watch face -->
+        <meta-data
+            android:name="com.google.android.wearable.watchface"
+            android:resource="@xml/watch_face_info" />
+            
+        <!-- Specify the WFF XML file -->
+        <meta-data
+            android:name="com.google.android.wearable.watchface.xml"
+            android:resource="@raw/watchface" />
+            
+        <!-- Preview images -->
+        <meta-data
+            android:name="com.google.android.wearable.watchface.preview"
+            android:resource="@drawable/watch_face_preview" />
 
-            <meta-data
-                android:name="com.google.android.wearable.watchface.preview"
-                android:resource="@drawable/watch_face_preview" />
-
-            <intent-filter>
-                <action android:name="androidx.wear.watchface.WatchFaceService" />
-            </intent-filter>
-        </service>
-
+        <meta-data
+            android:name="com.google.android.wearable.watchface.preview_circular"
+            android:resource="@drawable/watch_face_preview" />
 
     </application>
 

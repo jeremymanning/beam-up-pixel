@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFaceInfo>
+    <Preview value="@drawable/watch_face_preview" />
+    <PreviewCircular value="@drawable/watch_face_preview" />
+    <Category value="CATEGORY_CASUAL" />
+    <Editable value="false" />
+</WatchFaceInfo>
