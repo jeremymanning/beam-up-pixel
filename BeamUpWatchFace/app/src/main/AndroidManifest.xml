@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.beamupwatchface">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-feature android:name="android.hardware.type.watch" />
 
@@ -9,17 +8,29 @@
         android:label="@string/watch_face_name"
         android:roundIcon="@drawable/watch_face_preview"
         android:theme="@android:style/Theme.DeviceDefault">
-        
+
+        <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
+
         <service
-            android:name=".BeamUpWatchFaceService"
-            android:label="@string/watch_face_name"
+            android:name="com.example.beamupwatchface.BeamUpWatchFaceService"
+            android:exported="true"
+            android:label="@string/my_watch_face"
             android:permission="android.permission.BIND_WALLPAPER">
-            <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService" />
-            </intent-filter>
+
             <meta-data
                 android:name="android.service.wallpaper"
                 android:resource="@xml/watch_face" />
+
+            <meta-data
+                android:name="com.google.android.wearable.watchface.preview"
+                android:resource="@drawable/watch_face_preview" />
+
+            <intent-filter android:priority="1">
+                <action android:name="android.service.wallpaper.WallpaperService" />
+                <category android:name="com.google.android.wearable.watchface.category.WATCH_FACE" />
+            </intent-filter>
         </service>
 
     </application>

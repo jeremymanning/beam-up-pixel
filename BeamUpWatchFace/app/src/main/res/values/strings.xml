@@ -1,4 +1,5 @@
 <resources>
     <string name="watch_face_name">Beam Up</string>
+    <string name="my_watch_face">Beam Up</string>
     <string name="watch_face_description">Inspired by Pebble Beam Up Watchface</string>
 </resources>

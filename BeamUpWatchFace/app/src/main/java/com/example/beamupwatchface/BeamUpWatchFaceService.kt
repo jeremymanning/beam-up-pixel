@@ -1,31 +1,35 @@
 package com.example.beamupwatchface
 
-import android.graphics.Rect
 import android.view.SurfaceHolder
-import androidx.wear.watchface.CanvasType
-import androidx.wear.watchface.CanvasWatchFaceService
 import androidx.wear.watchface.ComplicationSlotsManager
-import androidx.wear.watchface.Renderer.CanvasRenderer
-import androidx.wear.watchface.style.CurrentUserStyleRepository
+import androidx.wear.watchface.WatchFace
+import androidx.wear.watchface.WatchFaceService
+import androidx.wear.watchface.WatchFaceType
 import androidx.wear.watchface.WatchState
-import kotlinx.coroutines.CoroutineScope
+import androidx.wear.watchface.style.CurrentUserStyleRepository
+import androidx.wear.watchface.style.UserStyleSchema
 
-class BeamUpWatchFaceService : CanvasWatchFaceService() {
+class BeamUpWatchFaceService : WatchFaceService() {
 
-    override fun createCanvasRenderer(
+    override fun createUserStyleSchema(): UserStyleSchema = UserStyleSchema(emptyList())
+
+    override fun createComplicationSlotsManager(
+        currentUserStyleRepository: CurrentUserStyleRepository
+    ): ComplicationSlotsManager = ComplicationSlotsManager(emptyList(), currentUserStyleRepository)
+
+    override suspend fun createWatchFace(
         surfaceHolder: SurfaceHolder,
-        currentUserStyleRepository: CurrentUserStyleRepository,
         watchState: WatchState,
         complicationSlotsManager: ComplicationSlotsManager,
-        coroutineScope: CoroutineScope,
-    ): CanvasRenderer {
-        return BeamUpCanvasRenderer(
+        currentUserStyleRepository: CurrentUserStyleRepository
+    ): WatchFace = WatchFace(
+        watchFaceType = WatchFaceType.DIGITAL,
+        renderer = BeamUpCanvasRenderer(
             context = applicationContext,
             surfaceHolder = surfaceHolder,
             currentUserStyleRepository = currentUserStyleRepository,
             watchState = watchState,
-            coroutineScope = coroutineScope,
-            complicationSlotsManager = complicationSlotsManager,
+            complicationSlotsManager = complicationSlotsManager
         )
-    }
+    )
 }

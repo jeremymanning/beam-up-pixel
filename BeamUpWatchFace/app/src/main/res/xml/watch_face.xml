@@ -1,6 +1,5 @@
-<WallpaperService xmlns:android="http://schemas.android.com/apk/res/android"
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
     android:label="@string/watch_face_name"
     android:description="@string/watch_face_description"
-    android:settingsActivity="com.example.beamupwatchface.SettingsActivity"
-    android:icon="@drawable/watch_face_preview">
-</WallpaperService>
+    android:thumbnail="@drawable/watch_face_preview">
+</wallpaper>
