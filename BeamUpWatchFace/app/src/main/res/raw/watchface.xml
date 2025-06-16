@@ -74,39 +74,43 @@
       </TimeText>
     </DigitalClock>
 
-    <!-- DEBUG: Static beam rectangles at full extension for positioning verification -->
+    <!-- Beam animations - testing with seconds-based height animation like progress bar -->
     <!-- Hour tens beam -->
-    <Group x="34" y="0" width="73" height="204" name="hour_tens_beam_debug">
+    <Group x="34" y="0" width="73" height="204" name="hour_tens_beam">
       <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
+          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
         </Rectangle>
       </PartDraw>
     </Group>
     
     <!-- Hour ones beam -->
-    <Group x="121" y="0" width="73" height="204" name="hour_ones_beam_debug">
+    <Group x="121" y="0" width="73" height="204" name="hour_ones_beam">
       <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
+          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
         </Rectangle>
       </PartDraw>
     </Group>
     
     <!-- Minute tens beam -->
-    <Group x="238" y="0" width="73" height="204" name="minute_tens_beam_debug">
+    <Group x="238" y="0" width="73" height="204" name="minute_tens_beam">
       <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
+          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
         </Rectangle>
       </PartDraw>
     </Group>
     
     <!-- Minute ones beam -->
-    <Group x="326" y="0" width="73" height="204" name="minute_ones_beam_debug">
+    <Group x="326" y="0" width="73" height="204" name="minute_ones_beam">
       <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
+          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
         </Rectangle>
       </PartDraw>
     </Group>
