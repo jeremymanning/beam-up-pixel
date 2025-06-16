@@ -29,19 +29,59 @@
       <!-- For further attributes see:
           https://developer.android.com/training/wearables/wff/clock/time-text -->
       <!-- SYNC_TO_DEVICE specifies to respect the device 12/24h setting -->
-      <!-- Interactive mode version-->
-      <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="124" width="450" height="100" alpha="255">
-        <Variant mode="AMBIENT" target="alpha" value="0"/>
-        <!-- Specifying the watch's default font-family by using SYNC_TO_DEVICE instead of a named family -->
-        <Font family="@font/imagine_font" size="117" weight="NORMAL" slant="NORMAL" color="#ffffffff"/>
-      </TimeText>
-      <!-- Ambient mode version - thinner weight -->
+      <!-- Ambient mode version -->
       <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="124" width="450" height="100" alpha="0">
-        <!-- Specifying the watch's default family by using SYNC_TO_DEVICE -->
         <Variant mode="AMBIENT" target="alpha" value="255"/>
-        <Font family="@font/imagine_font" size="117" weight="THIN" slant="NORMAL" color="#ffffffff"/>
+        <Font family="@font/imagine_font" size="117" weight="THIN" slant="NORMAL" color="#ffffff"/>
       </TimeText>
     </DigitalClock>
+    
+    <!-- Individual digits for beam animation - using hardcoded values for now -->
+    <!-- Hour tens digit -->
+    <PartText x="48" y="124" width="60" height="100">
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>1</Template>
+        </Font>
+      </Text>
+    </PartText>
+    
+    <!-- Hour ones digit -->
+    <PartText x="135" y="124" width="60" height="100">
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>2</Template>
+        </Font>
+      </Text>
+    </PartText>
+    
+    <!-- Colon separator -->
+    <PartText x="209" y="124" width="30" height="100">
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>:</Template>
+        </Font>
+      </Text>
+    </PartText>
+    
+    <!-- Minute tens digit -->
+    <PartText x="252" y="124" width="60" height="100">
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>3</Template>
+        </Font>
+      </Text>
+    </PartText>
+    
+    <!-- Minute ones digit -->
+    <PartText x="340" y="124" width="60" height="100">
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>4</Template>
+        </Font>
+      </Text>
+    </PartText>
+    
     <Group x="0" y="0" width="450" height="450" name="hello_world">
       <PartText x="0" y="246" width="450" height="50">
         <Variant mode="AMBIENT" target="alpha" value="0"/>
