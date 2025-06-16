@@ -36,24 +36,20 @@
       </TimeText>
     </DigitalClock>
     
-    <!-- Individual digits for beam animation - using hardcoded values for now -->
+    <!-- Individual digits for beam animation - using live digit formats -->
     <!-- Hour tens digit -->
-    <PartText x="33" y="124" width="90" height="100">
-      <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>8</Template>
-        </Font>
-      </Text>
-    </PartText>
+    <DigitalClock x="33" y="124" width="90" height="100">
+      <TimeText x="0" y="0" width="90" height="100" format="hh_10" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
+      </TimeText>
+    </DigitalClock>
     
     <!-- Hour ones digit -->
-    <PartText x="120" y="124" width="90" height="100">
-      <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>8</Template>
-        </Font>
-      </Text>
-    </PartText>
+    <DigitalClock x="120" y="124" width="90" height="100">
+      <TimeText x="0" y="0" width="90" height="100" format="hh_1" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
+      </TimeText>
+    </DigitalClock>
     
     <!-- Colon separator -->
     <PartText x="209" y="124" width="30" height="100">
@@ -65,22 +61,18 @@
     </PartText>
     
     <!-- Minute tens digit -->
-    <PartText x="237" y="124" width="90" height="100">
-      <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>8</Template>
-        </Font>
-      </Text>
-    </PartText>
+    <DigitalClock x="237" y="124" width="90" height="100">
+      <TimeText x="0" y="0" width="90" height="100" format="mm_10" align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
+      </TimeText>
+    </DigitalClock>
     
     <!-- Minute ones digit -->
-    <PartText x="325" y="124" width="90" height="100">
-      <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>8</Template>
-        </Font>
-      </Text>
-    </PartText>
+    <DigitalClock x="325" y="124" width="90" height="100">
+      <TimeText x="0" y="0" width="90" height="100" format="mm_1" align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
+      </TimeText>
+    </DigitalClock>
     
     <Group x="0" y="0" width="450" height="450" name="hello_world">
       <PartText x="0" y="246" width="450" height="50">
