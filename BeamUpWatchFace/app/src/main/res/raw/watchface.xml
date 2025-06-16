@@ -73,6 +73,43 @@
         <Font family="@font/imagine_font" size="117" color="#ffffff"/>
       </TimeText>
     </DigitalClock>
+
+    <!-- DEBUG: Static beam rectangles at full extension for positioning verification -->
+    <!-- Hour tens beam -->
+    <Group x="34" y="0" width="73" height="204" name="hour_tens_beam_debug">
+      <PartDraw x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73" height="204">
+          <Fill color="#ffffff"/>
+        </Rectangle>
+      </PartDraw>
+    </Group>
+    
+    <!-- Hour ones beam -->
+    <Group x="121" y="0" width="73" height="204" name="hour_ones_beam_debug">
+      <PartDraw x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73" height="204">
+          <Fill color="#ffffff"/>
+        </Rectangle>
+      </PartDraw>
+    </Group>
+    
+    <!-- Minute tens beam -->
+    <Group x="238" y="0" width="73" height="204" name="minute_tens_beam_debug">
+      <PartDraw x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73" height="204">
+          <Fill color="#ffffff"/>
+        </Rectangle>
+      </PartDraw>
+    </Group>
+    
+    <!-- Minute ones beam -->
+    <Group x="326" y="0" width="73" height="204" name="minute_ones_beam_debug">
+      <PartDraw x="0" y="0" width="73" height="204">
+        <Rectangle x="0" y="0" width="73" height="204">
+          <Fill color="#ffffff"/>
+        </Rectangle>
+      </PartDraw>
+    </Group>
     
     <Group x="0" y="0" width="450" height="450" name="hello_world">
       <PartText x="0" y="246" width="450" height="50">
