@@ -38,10 +38,10 @@
     
     <!-- Individual digits for beam animation - using hardcoded values for now -->
     <!-- Hour tens digit -->
-    <PartText x="48" y="124" width="60" height="100">
+    <PartText x="33" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>1</Template>
+          <Template>8</Template>
         </Font>
       </Text>
     </PartText>
@@ -50,7 +50,7 @@
     <PartText x="120" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>2</Template>
+          <Template>8</Template>
         </Font>
       </Text>
     </PartText>
@@ -65,10 +65,10 @@
     </PartText>
     
     <!-- Minute tens digit -->
-    <PartText x="252" y="124" width="60" height="100">
+    <PartText x="237" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>3</Template>
+          <Template>8</Template>
         </Font>
       </Text>
     </PartText>
@@ -77,7 +77,7 @@
     <PartText x="325" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
-          <Template>4</Template>
+          <Template>8</Template>
         </Font>
       </Text>
     </PartText>
