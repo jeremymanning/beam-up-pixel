@@ -47,7 +47,7 @@
     </PartText>
     
     <!-- Hour ones digit -->
-    <PartText x="135" y="124" width="60" height="100">
+    <PartText x="120" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
           <Template>2</Template>
@@ -74,7 +74,7 @@
     </PartText>
     
     <!-- Minute ones digit -->
-    <PartText x="340" y="124" width="60" height="100">
+    <PartText x="325" y="124" width="90" height="100">
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
           <Template>4</Template>
