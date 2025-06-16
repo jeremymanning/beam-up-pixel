@@ -74,43 +74,47 @@
       </TimeText>
     </DigitalClock>
 
-    <!-- Beam animations - testing with seconds-based height animation like progress bar -->
-    <!-- Hour tens beam -->
+    <!-- Beam animations - triggered by digit changes -->
+    <!-- Hour tens beam - only animates when hour tens will change -->
     <Group x="34" y="0" width="73" height="204" name="hour_tens_beam">
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
+          <!-- Hour tens changes: 09:59->10:00, 19:59->20:00, 23:59->00:00 -->
+          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Hour ones beam -->
+    <!-- Hour ones beam - animates when hour ones will change -->
     <Group x="121" y="0" width="73" height="204" name="hour_ones_beam">
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
+          <!-- Hour ones changes every hour at XX:59 -->
+          <Transform target="height" value="([MINUTE] == 59) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Minute tens beam -->
+    <!-- Minute tens beam - animates when minute tens will change -->
     <Group x="238" y="0" width="73" height="204" name="minute_tens_beam">
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
+          <!-- Minute tens changes at X9 minutes (09, 19, 29, 39, 49, 59) -->
+          <Transform target="height" value="(([MINUTE] % 10) == 9) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Minute ones beam -->
+    <!-- Minute ones beam - animates every minute -->
     <Group x="326" y="0" width="73" height="204" name="minute_ones_beam">
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <Transform target="height" value="([SECOND] &lt; 59) ? ([SECOND] * 3.4) : ([MILLISECOND] &lt; 650) ? 204 : (204 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
+          <!-- Minute ones changes every minute -->
+          <Transform target="height" value="([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
