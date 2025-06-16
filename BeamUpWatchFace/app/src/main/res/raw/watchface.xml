@@ -37,19 +37,25 @@
     </DigitalClock>
     
     <!-- Individual digits for beam animation - using live digit formats -->
-    <!-- Hour tens digit -->
-    <DigitalClock x="33" y="124" width="90" height="100">
-      <TimeText x="0" y="0" width="90" height="100" format="hh_10" hourFormat="SYNC_TO_DEVICE" align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
-      </TimeText>
-    </DigitalClock>
+    <!-- Hour tens digit with beam animation -->
+    <PartText x="33" y="124" width="90" height="100" alpha="255">
+      <Transform target="alpha" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>%s<Parameter expression="floor(([IS_24_HOUR_MODE]?[HOUR_0_23]:[HOUR_1_12])/10)"/></Template>
+        </Font>
+      </Text>
+    </PartText>
     
-    <!-- Hour ones digit -->
-    <DigitalClock x="120" y="124" width="90" height="100">
-      <TimeText x="0" y="0" width="90" height="100" format="hh_1" hourFormat="SYNC_TO_DEVICE" align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
-      </TimeText>
-    </DigitalClock>
+    <!-- Hour ones digit with beam animation -->
+    <PartText x="120" y="124" width="90" height="100" alpha="255">
+      <Transform target="alpha" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>%s<Parameter expression="([IS_24_HOUR_MODE]?[HOUR_0_23]:[HOUR_1_12]) % 10"/></Template>
+        </Font>
+      </Text>
+    </PartText>
     
     <!-- Colon separator -->
     <PartText x="209" y="124" width="30" height="100">
@@ -60,12 +66,15 @@
       </Text>
     </PartText>
     
-    <!-- Minute tens digit -->
-    <DigitalClock x="237" y="124" width="90" height="100">
-      <TimeText x="0" y="0" width="90" height="100" format="mm_10" align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
-      </TimeText>
-    </DigitalClock>
+    <!-- Minute tens digit with beam animation -->
+    <PartText x="237" y="124" width="90" height="100" alpha="255">
+      <Transform target="alpha" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>%s<Parameter expression="floor([MINUTE] / 10)"/></Template>
+        </Font>
+      </Text>
+    </PartText>
     
     <!-- Minute ones digit with beam animation -->
     <PartText x="325" y="124" width="90" height="100" alpha="255">
@@ -83,8 +92,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Hour tens changes: 09:59->10:00, 19:59->20:00, 23:59->00:00 - Four phase animation -->
-          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
+          <!-- Hour tens changes: 09:59:59->10:00, 19:59:59->20:00, 23:59:59->00:00 - Four phase animation -->
+          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59) &amp;&amp; ([SECOND] == 59)) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ((([HOUR_0_23] == 10) || ([HOUR_0_23] == 20) || ([HOUR_0_23] == 0)) &amp;&amp; ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175)) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
@@ -94,8 +103,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Hour ones changes every hour at XX:59 - Four phase animation -->
-          <Transform target="height" value="([MINUTE] == 59) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
+          <!-- Hour ones changes every hour at XX:59:59 - Four phase animation -->
+          <Transform target="height" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
@@ -105,8 +114,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Minute tens changes at X9 minutes (09, 19, 29, 39, 49, 59) - Four phase animation -->
-          <Transform target="height" value="(([MINUTE] % 10) == 9) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
+          <!-- Minute tens changes at X9:59 minutes - Four phase animation -->
+          <Transform target="height" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : (([MINUTE] % 10) == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
