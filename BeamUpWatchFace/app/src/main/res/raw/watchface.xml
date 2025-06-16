@@ -67,12 +67,15 @@
       </TimeText>
     </DigitalClock>
     
-    <!-- Minute ones digit -->
-    <DigitalClock x="325" y="124" width="90" height="100">
-      <TimeText x="0" y="0" width="90" height="100" format="mm_1" align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff"/>
-      </TimeText>
-    </DigitalClock>
+    <!-- Minute ones digit with beam animation -->
+    <PartText x="325" y="124" width="90" height="100" alpha="255">
+      <Transform target="alpha" value="([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
+      <Text align="CENTER">
+        <Font family="@font/imagine_font" size="117" color="#ffffff">
+          <Template>%s<Parameter expression="[MINUTE] % 10"/></Template>
+        </Font>
+      </Text>
+    </PartText>
 
     <!-- Beam animations - triggered by digit changes -->
     <!-- Hour tens beam - only animates when hour tens will change -->
