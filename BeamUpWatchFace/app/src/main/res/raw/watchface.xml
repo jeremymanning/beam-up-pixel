@@ -80,8 +80,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Hour tens changes: 09:59->10:00, 19:59->20:00, 23:59->00:00 -->
-          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
+          <!-- Hour tens changes: 09:59->10:00, 19:59->20:00, 23:59->00:00 - Four phase animation -->
+          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
@@ -91,8 +91,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Hour ones changes every hour at XX:59 -->
-          <Transform target="height" value="([MINUTE] == 59) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
+          <!-- Hour ones changes every hour at XX:59 - Four phase animation -->
+          <Transform target="height" value="([MINUTE] == 59) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
@@ -102,8 +102,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Minute tens changes at X9 minutes (09, 19, 29, 39, 49, 59) -->
-          <Transform target="height" value="(([MINUTE] % 10) == 9) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0) : 0" />
+          <!-- Minute tens changes at X9 minutes (09, 19, 29, 39, 49, 59) - Four phase animation -->
+          <Transform target="height" value="(([MINUTE] % 10) == 9) ? (([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
@@ -113,8 +113,8 @@
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
-          <!-- Minute ones changes every minute -->
-          <Transform target="height" value="([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? 204 : ([MILLISECOND] &lt; 350) ? (204 * (1 - (([MILLISECOND] - 175) / 175.0))) : 0) : 0" />
+          <!-- Minute ones changes every minute - Four phase animation -->
+          <Transform target="height" value="([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
