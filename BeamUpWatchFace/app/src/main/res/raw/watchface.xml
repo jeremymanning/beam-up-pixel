@@ -23,22 +23,18 @@
 -->
 <WatchFace width="450" height="450">
   <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
-  <Metadata key="PREVIEW_TIME" value="10:08:32"/>
+  <Metadata key="PREVIEW_TIME" value="07:09:32"/>
   <Scene backgroundColor="#ff000000">
     <DigitalClock x="0" y="0" width="450" height="450">
       <!-- For further attributes see:
           https://developer.android.com/training/wearables/wff/clock/time-text -->
       <!-- SYNC_TO_DEVICE specifies to respect the device 12/24h setting -->
-      <!-- Ambient mode version -->
-      <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="124" width="450" height="100" alpha="0">
-        <Variant mode="AMBIENT" target="alpha" value="255"/>
-        <Font family="@font/imagine_font" size="117" weight="THIN" slant="NORMAL" color="#ffffff"/>
-      </TimeText>
     </DigitalClock>
     
     <!-- Individual digits for beam animation - using live digit formats -->
     <!-- Hour tens digit with beam animation -->
     <PartText x="33" y="124" width="90" height="100" alpha="255">
+      <Variant mode="AMBIENT" target="alpha" value="100"/>
       <Transform target="alpha" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
@@ -49,6 +45,7 @@
     
     <!-- Hour ones digit with beam animation -->
     <PartText x="120" y="124" width="90" height="100" alpha="255">
+      <Variant mode="AMBIENT" target="alpha" value="100"/>
       <Transform target="alpha" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
@@ -59,6 +56,7 @@
     
     <!-- Colon separator -->
     <PartText x="209" y="124" width="30" height="100">
+      <Variant mode="AMBIENT" target="alpha" value="100"/>
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
           <Template>:</Template>
@@ -68,6 +66,7 @@
     
     <!-- Minute tens digit with beam animation -->
     <PartText x="237" y="124" width="90" height="100" alpha="255">
+      <Variant mode="AMBIENT" target="alpha" value="100"/>
       <Transform target="alpha" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
@@ -78,6 +77,7 @@
     
     <!-- Minute ones digit with beam animation -->
     <PartText x="325" y="124" width="90" height="100" alpha="255">
+      <Variant mode="AMBIENT" target="alpha" value="100"/>
       <Transform target="alpha" value="([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
         <Font family="@font/imagine_font" size="117" color="#ffffff">
@@ -89,6 +89,7 @@
     <!-- Beam animations - triggered by digit changes -->
     <!-- Hour tens beam - only animates when hour tens will change -->
     <Group x="34" y="0" width="73" height="204" name="hour_tens_beam">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
@@ -100,6 +101,7 @@
     
     <!-- Hour ones beam - animates when hour ones will change -->
     <Group x="121" y="0" width="73" height="204" name="hour_ones_beam">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
@@ -111,6 +113,7 @@
     
     <!-- Minute tens beam - animates when minute tens will change -->
     <Group x="238" y="0" width="73" height="204" name="minute_tens_beam">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
@@ -122,6 +125,7 @@
     
     <!-- Minute ones beam - animates every minute -->
     <Group x="326" y="0" width="73" height="204" name="minute_ones_beam">
+      <Variant mode="AMBIENT" target="alpha" value="0"/>
       <PartDraw x="0" y="0" width="73" height="204">
         <Rectangle x="0" y="0" width="73">
           <Fill color="#ffffff"/>
@@ -133,11 +137,11 @@
     
     <Group x="0" y="0" width="450" height="450" name="hello_world">
       <PartText x="0" y="246" width="450" height="50">
-        <Variant mode="AMBIENT" target="alpha" value="0"/>
+        <Variant mode="AMBIENT" target="alpha" value="100"/>
         <Text align="CENTER">
           <!-- Demonstrates using Android string resources for localization -->
           <Font family="@font/imagine_font" size="72" color="#ffffffff">
-            <Template>%s %02d<Parameter expression="[DAY_OF_WEEK_S]"></Parameter><Parameter expression="[DAY]"></Parameter></Template>
+              <Template>%s %02d<Parameter expression="[DAY_OF_WEEK_S]"></Parameter><Parameter expression="[DAY]"></Parameter></Template>
           </Font>
         </Text>
       </PartText>
