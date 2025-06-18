@@ -1,3 +1,4 @@
 <resources>
     <dimen name="time_text_size">48sp</dimen>
+    <dimen name="watch_face_size">450dp</dimen>
 </resources>

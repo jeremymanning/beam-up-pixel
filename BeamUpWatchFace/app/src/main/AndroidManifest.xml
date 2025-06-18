@@ -2,7 +2,10 @@
 
     <uses-feature android:name="android.hardware.type.watch" />
 
-    <!-- Note: hasCode is required to be false for Watch Face Format -->
+    <uses-permission android:name="com.google.android.permission.PROVIDE_BACKGROUND" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Watch Face Format app with no code -->
     <application
         android:label="@string/watch_face_name"
         android:hasCode="false">

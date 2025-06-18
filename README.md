@@ -23,6 +23,7 @@ While inspired by the original, this implementation includes some updates for mo
 - **Synchronized Effects**: All changing digits animate simultaneously for a cohesive effect
 - **Monospace Font**: Uses the classic Imagine font for authentic digital watch aesthetics
 - **Optimized Performance**: Hardware-accelerated rendering for smooth 60fps animations
+- **Universal Compatibility**: Responsive design adapts to any Wear OS screen size (round or square)
 
 ## Animated Preview
 

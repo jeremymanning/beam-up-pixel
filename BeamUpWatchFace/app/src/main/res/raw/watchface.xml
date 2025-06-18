@@ -15,139 +15,130 @@
     limitations under the License.
 -->
 <!--
-    Basic example of a text-only, digital watch face, demonstrating:
-    
-    - Use of TimeText for digital watch faces
-    - Showing different styling in ambient mode, via the Variant element
-    - Localization using Android string resources
+    Beam Up watch face with percentage-based positioning for multi-device support
 -->
-<WatchFace width="450" height="450">
+<WatchFace width="100%" height="100%">
   <Metadata key="CLOCK_TYPE" value="DIGITAL"/>
   <Metadata key="PREVIEW_TIME" value="10:08:32"/>
   <Scene backgroundColor="#ff000000">
-    <DigitalClock x="0" y="0" width="450" height="450">
-      <!-- For further attributes see:
-          https://developer.android.com/training/wearables/wff/clock/time-text -->
-      <!-- SYNC_TO_DEVICE specifies to respect the device 12/24h setting -->
+    <DigitalClock x="0" y="0" width="100%" height="100%">
       <!-- Ambient mode version -->
-      <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="124" width="450" height="100" alpha="0">
+      <TimeText format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER" x="0" y="27.5%" width="100%" height="22.2%" alpha="0">
         <Variant mode="AMBIENT" target="alpha" value="255"/>
-        <Font family="@font/imagine_font" size="117" weight="THIN" slant="NORMAL" color="#ffffff"/>
+        <Font family="@font/imagine_font" size="26%" weight="THIN" slant="NORMAL" color="#ffffff"/>
       </TimeText>
     </DigitalClock>
     
-    <!-- Individual digits for beam animation - using live digit formats -->
+    <!-- Individual digits for beam animation - using percentage units -->
     <!-- Hour tens digit with beam animation -->
-    <PartText x="33" y="124" width="90" height="100" alpha="255">
+    <PartText x="7.3%" y="27.5%" width="20%" height="22.2%" alpha="255">
       <Transform target="alpha" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59)) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
+        <Font family="@font/imagine_font" size="26%" color="#ffffff">
           <Template>%s<Parameter expression="floor(([IS_24_HOUR_MODE]?[HOUR_0_23]:[HOUR_1_12])/10)"/></Template>
         </Font>
       </Text>
     </PartText>
     
     <!-- Hour ones digit with beam animation -->
-    <PartText x="120" y="124" width="90" height="100" alpha="255">
+    <PartText x="26.7%" y="27.5%" width="20%" height="22.2%" alpha="255">
       <Transform target="alpha" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
+        <Font family="@font/imagine_font" size="26%" color="#ffffff">
           <Template>%s<Parameter expression="([IS_24_HOUR_MODE]?[HOUR_0_23]:[HOUR_1_12]) % 10"/></Template>
         </Font>
       </Text>
     </PartText>
     
     <!-- Colon separator -->
-    <PartText x="209" y="124" width="30" height="100">
+    <PartText x="46.4%" y="27.5%" width="6.7%" height="22.2%">
       <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
+        <Font family="@font/imagine_font" size="26%" color="#ffffff">
           <Template>:</Template>
         </Font>
       </Text>
     </PartText>
     
     <!-- Minute tens digit with beam animation -->
-    <PartText x="237" y="124" width="90" height="100" alpha="255">
+    <PartText x="52.7%" y="27.5%" width="20%" height="22.2%" alpha="255">
       <Transform target="alpha" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
+        <Font family="@font/imagine_font" size="26%" color="#ffffff">
           <Template>%s<Parameter expression="floor([MINUTE] / 10)"/></Template>
         </Font>
       </Text>
     </PartText>
     
     <!-- Minute ones digit with beam animation -->
-    <PartText x="325" y="124" width="90" height="100" alpha="255">
+    <PartText x="72.2%" y="27.5%" width="20%" height="22.2%" alpha="255">
       <Transform target="alpha" value="([SECOND] == 59) &amp;&amp; ([MILLISECOND] &gt;= 650) &amp;&amp; ([MILLISECOND] &lt; 1000) ? 0 : 255"/>
       <Text align="CENTER">
-        <Font family="@font/imagine_font" size="117" color="#ffffff">
+        <Font family="@font/imagine_font" size="26%" color="#ffffff">
           <Template>%s<Parameter expression="[MINUTE] % 10"/></Template>
         </Font>
       </Text>
     </PartText>
 
-    <!-- Beam animations - triggered by digit changes -->
-    <!-- Hour tens beam - only animates when hour tens will change -->
-    <Group x="34" y="0" width="73" height="204" name="hour_tens_beam">
-      <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73">
+    <!-- Beam animations - using percentage units -->
+    <!-- Hour tens beam -->
+    <Group x="7.6%" y="0" width="16.2%" height="45.3%" name="hour_tens_beam">
+      <PartDraw x="0" y="0" width="100%" height="100%">
+        <Rectangle x="0" y="0" width="100%">
           <Fill color="#ffffff"/>
-          <!-- Hour tens changes: 09:59:59->10:00, 19:59:59->20:00, 23:59:59->00:00 - Four phase animation -->
-          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59) &amp;&amp; ([SECOND] == 59)) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ((([HOUR_0_23] == 10) || ([HOUR_0_23] == 20) || ([HOUR_0_23] == 0)) &amp;&amp; ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175)) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
+          <!-- Four phase animation with percentage height -->
+          <Transform target="height" value="((([HOUR_0_23] == 9) || ([HOUR_0_23] == 19) || ([HOUR_0_23] == 23)) &amp;&amp; ([MINUTE] == 59) &amp;&amp; ([SECOND] == 59)) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 100) : ([MILLISECOND] &lt; 825) ? (100 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 100) : 100) : ((([HOUR_0_23] == 10) || ([HOUR_0_23] == 20) || ([HOUR_0_23] == 0)) &amp;&amp; ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175)) ? (100 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Hour ones beam - animates when hour ones will change -->
-    <Group x="121" y="0" width="73" height="204" name="hour_ones_beam">
-      <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73">
+    <!-- Hour ones beam -->
+    <Group x="26.9%" y="0" width="16.2%" height="45.3%" name="hour_ones_beam">
+      <PartDraw x="0" y="0" width="100%" height="100%">
+        <Rectangle x="0" y="0" width="100%">
           <Fill color="#ffffff"/>
-          <!-- Hour ones changes every hour at XX:59:59 - Four phase animation -->
-          <Transform target="height" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
+          <Transform target="height" value="([MINUTE] == 59) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 100) : ([MILLISECOND] &lt; 825) ? (100 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 100) : 100) : ([MINUTE] == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (100 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Minute tens beam - animates when minute tens will change -->
-    <Group x="238" y="0" width="73" height="204" name="minute_tens_beam">
-      <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73">
+    <!-- Minute tens beam -->
+    <Group x="52.9%" y="0" width="16.2%" height="45.3%" name="minute_tens_beam">
+      <PartDraw x="0" y="0" width="100%" height="100%">
+        <Rectangle x="0" y="0" width="100%">
           <Fill color="#ffffff"/>
-          <!-- Minute tens changes at X9:59 minutes - Four phase animation -->
-          <Transform target="height" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : (([MINUTE] % 10) == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0" />
+          <Transform target="height" value="(([MINUTE] % 10) == 9) &amp;&amp; ([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 100) : ([MILLISECOND] &lt; 825) ? (100 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 100) : 100) : (([MINUTE] % 10) == 0) &amp;&amp; ([SECOND] == 0) &amp;&amp; ([MILLISECOND] &lt; 175) ? (100 * (1 - ([MILLISECOND] / 175.0))) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <!-- Minute ones beam - animates every minute -->
-    <Group x="326" y="0" width="73" height="204" name="minute_ones_beam">
-      <PartDraw x="0" y="0" width="73" height="204">
-        <Rectangle x="0" y="0" width="73">
+    <!-- Minute ones beam -->
+    <Group x="72.4%" y="0" width="16.2%" height="45.3%" name="minute_ones_beam">
+      <PartDraw x="0" y="0" width="100%" height="100%">
+        <Rectangle x="0" y="0" width="100%">
           <Fill color="#ffffff"/>
-          <!-- Minute ones changes every minute - Four phase animation -->
-          <Transform target="height" value="([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 204) : ([MILLISECOND] &lt; 825) ? (204 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 204) : 204) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (204 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0" />
+          <Transform target="height" value="([SECOND] == 59) ? (([MILLISECOND] &lt; 475) ? 0 : ([MILLISECOND] &lt; 650) ? ((([MILLISECOND] - 475) / 175.0) * 100) : ([MILLISECOND] &lt; 825) ? (100 * (1 - (([MILLISECOND] - 650) / 175.0))) : ([MILLISECOND] &lt; 1000) ? ((([MILLISECOND] - 825) / 175.0) * 100) : 100) : ([SECOND] == 0) ? (([MILLISECOND] &lt; 175) ? (100 * (1 - ([MILLISECOND] / 175.0))) : 0) : 0" />
         </Rectangle>
       </PartDraw>
     </Group>
     
-    <Group x="0" y="0" width="450" height="450" name="hello_world">
-      <PartText x="0" y="246" width="450" height="50">
+    <!-- Date display -->
+    <Group x="0" y="0" width="100%" height="100%" name="date_display">
+      <PartText x="0" y="54.7%" width="100%" height="11.1%">
         <Variant mode="AMBIENT" target="alpha" value="0"/>
         <Text align="CENTER">
-          <!-- Demonstrates using Android string resources for localization -->
-          <Font family="@font/imagine_font" size="72" color="#ffffffff">
+          <Font family="@font/imagine_font" size="16%" color="#ffffffff">
             <Template>%s %02d<Parameter expression="[DAY_OF_WEEK_S]"></Parameter><Parameter expression="[DAY]"></Parameter></Template>
           </Font>
         </Text>
       </PartText>
     </Group>
-    <!-- Progress bar for seconds - moved to end for z-order -->
-    <Group x="0" y="220" width="450" height="10" name="progress_bar_group">
-      <PartDraw x="0" y="0" width="450" height="10">
-        <Rectangle x="0" y="0" height="10">
+    
+    <!-- Progress bar for seconds -->
+    <Group x="0" y="48.9%" width="100%" height="2.2%" name="progress_bar_group">
+      <PartDraw x="0" y="0" width="100%" height="100%">
+        <Rectangle x="0" y="0" height="100%">
           <Fill color="#FFFFFF" />
-          <Transform target="width" value="([SECOND] &lt; 59) ? ([SECOND] * 7.5) : ([MILLISECOND] &lt; 650) ? 450 : (450 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
+          <Transform target="width" value="([SECOND] &lt; 59) ? ([SECOND] * 1.667) : ([MILLISECOND] &lt; 650) ? 100 : (100 * (1 - (([MILLISECOND] - 650) / 350.0)))" />
         </Rectangle>
       </PartDraw>
       <Variant mode="AMBIENT" target="alpha" value="0"/>

@@ -7,8 +7,17 @@ android {
     namespace = "com.example.beamupwatchface"
     compileSdk = 34
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../release-keystore.jks")
+            storePassword = "beamup2024"
+            keyAlias = "beam-up-key"
+            keyPassword = "beamup2024"
+        }
+    }
+
     defaultConfig {
-        applicationId = "com.example.beamupwatchface"
+        applicationId = "com.infinite8looper.beamup"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -17,11 +26,13 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
