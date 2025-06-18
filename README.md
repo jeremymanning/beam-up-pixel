@@ -29,6 +29,16 @@ While inspired by the original, this implementation includes some updates for mo
 
 ![Beam Up Animation](screenshots/animation.gif)
 
+## Multi-Device Compatibility
+
+The watch face automatically scales to fit different screen sizes:
+
+| Small Round (320×320) | Medium Round (384×384) | Large Round (454×454) |
+|:---:|:---:|:---:|
+| ![Small Round](screenshots/320x320_scaled.png) | ![Medium Round](screenshots/384x384_scaled.png) | ![Large Round](screenshots/454x454_original.png) |
+
+*All screenshots show the same watch face at different scales - demonstrating WFF's automatic scaling capabilities.*
+
 ## Building and Installation
 
 ### Prerequisites
