@@ -1,35 +1,24 @@
 # Multi-Device Support
 
-The Beam Up watch face now uses percentage-based positioning to ensure it displays correctly on all Wear OS devices, regardless of screen size or shape.
+The Beam Up watch face is designed to work across all Wear OS devices through the Watch Face Format's automatic scaling system.
 
-## Responsive Design Implementation
+## How It Works
 
-### Layout Changes
-All positioning and sizing now uses percentages instead of pixels:
+### Automatic Scaling
+The Watch Face Format (WFF) automatically scales the watch face to fit different screen sizes:
 
-- **Watch Face Container**: 100% × 100%
-- **Time Digits**: Each digit takes 20% width, positioned with proper spacing
-- **Font Size**: 26% of screen height for optimal readability
-- **Beams**: 16.2% width, 45.3% height
-- **Progress Bar**: 100% width, 2.2% height
+- **Base Design**: Created at 450×450 pixels
+- **Scaling**: WFF proportionally scales all elements to fit the target screen
+- **Aspect Ratio**: Maintains consistent proportions across devices
 
-### Key Improvements
+### Tested Screen Sizes
 
-1. **Digit Positioning** (percentage of screen width):
-   - Hour tens: 7.3%
-   - Hour ones: 26.7%
-   - Colon: 46.4% (6.7% width)
-   - Minute tens: 52.7%
-   - Minute ones: 72.2%
+The watch face displays correctly on:
 
-2. **Vertical Positioning**:
-   - Time display: 27.5% from top
-   - Progress bar: 48.9% from top
-   - Date display: 54.7% from top
-
-3. **Animation Scaling**:
-   - Beam heights animate from 0% to 100% of their container
-   - Progress bar animates from 0% to 100% width
+1. **Small Round (320×320)**: Scaled to 71% of original size
+2. **Medium Round (384×384)**: Scaled to 85% of original size  
+3. **Large Round (454×454)**: Scaled to 101% of original size
+4. **Square Displays**: Content is centered with minimal edge cropping
 
 ## Testing on Different Devices
 
